@@ -1,0 +1,78 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "Mank",
+	"patterns": [
+		{
+			"include": "#keywords"
+		},
+		{
+			"include": "#strings"
+    },
+    {
+      "include": "#primitives"
+    },
+    {
+      "include": "#numeric-literals"
+    },
+    {
+      "include": "#function-declaration"
+    },
+    {
+      "include": "#pod-declaration"
+    },
+    {
+      "include": "#comments"
+    }
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.mank",
+				"match": "\\b(if|else|while|for|return)\\b"
+      }, {
+        "name": "constant.language.mank",
+        "match": "\\b(true|false)\\b"
+      }]
+		},
+		"strings": {
+			"name": "string.quoted.double.mank",
+			"begin": "\"",
+			"end": "\"",
+			"patterns": [
+				{
+					"name": "constant.character.escape.mank",
+					"match": "\\\\."
+				}
+			]
+    },
+		"function-declaration": {
+      "begin": "\\b(fun|proc)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+      "beginCaptures": {
+        "1": { "name": "constant.language.symbol-type.mank" },
+        "2": { "name": "meta.definition.function.js entity.name.function.js" }
+      },
+      "end": "\\:|\\(|\\{"
+    },
+    "pod-declaration": {
+      "begin": "\\b(pod)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+      "beginCaptures": {
+        "1": { "name": "constant.language.mank" },
+        "2": { "name": "support.type.mank" }
+      },
+      "end": "\\{"
+    },
+    "numeric-literals": {
+      "name": "constant.numeric.mank",
+      "match": "\\b([0-9]+(\\.[0-9]+)?)\\b"
+    },
+    "primitives": {
+      "name": "constant.language.mank",
+      "match": "\\b(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)\\b"
+    },
+    "comments": {
+      "match": "\\#.*$",
+      "name": "comment.line.mank"
+    }
+	},
+	"scopeName": "source.mank"
+}
