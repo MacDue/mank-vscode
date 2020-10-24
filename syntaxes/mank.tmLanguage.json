@@ -132,9 +132,10 @@
       }
     },
     "custom-types": {
-      "match": "\\:\\s*([_$[:alpha:]][_$[:alnum:]]*)\\b",
+      "match": "\\:\\s*(?:(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|([_$[:alpha:]][_$[:alnum:]]*))\\b",
       "captures": {
-        "1": {"name": "support.type.mank" }
+        "1": {"name": "constant.language.mank" },
+        "2": {"name": "support.type.mank" }
       }
     },
     "misc-ident": {
