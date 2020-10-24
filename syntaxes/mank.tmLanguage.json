@@ -22,6 +22,15 @@
     },
     {
       "include": "#comments"
+    },
+    {
+      "include": "#call"
+    },
+    {
+      "include": "#custom-types"
+    },
+    {
+      "include": "#misc-ident"
     }
 	],
 	"repository": {
@@ -115,6 +124,24 @@
     "comments": {
       "match": "\\#.*$",
       "name": "comment.line.mank"
+    },
+    "call":{
+      "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\s*\\(",
+      "captures": {
+        "1": {"name": "meta.definition.function.js entity.name.function.js" }
+      }
+    },
+    "custom-types": {
+      "match": "\\:\\s*([_$[:alpha:]][_$[:alnum:]]*)\\b",
+      "captures": {
+        "1": {"name": "support.type.mank" }
+      }
+    },
+    "misc-ident": {
+      "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\b",
+      "captures": {
+        "1": {"name": "support.type.property-name.mank" }
+      }
     }
 	},
 	"scopeName": "source.mank"
