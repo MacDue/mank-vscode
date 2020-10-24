@@ -1,6 +1,6 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Mank",
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Mank",
 	"patterns": [
 		{
 			"include": "#keywords"
@@ -25,15 +25,6 @@
     }
 	],
 	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.mank",
-				"match": "\\b(if|else|while|for|return)\\b"
-      }, {
-        "name": "constant.language.mank",
-        "match": "\\b(true|false)\\b"
-      }]
-		},
 		"strings": {
 			"name": "string.quoted.double.mank",
 			"begin": "\"",
@@ -45,22 +36,74 @@
 				}
 			]
     },
+    "param-list":{
+      "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)(?:\\s*\\:\\s*(?:(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|([_$[:alpha:]][_$[:alnum:]]*)))",
+      "captures": {
+        "1": { "name": "support.type.property-name.mank" },
+        "2": { "name": "constant.language.mank" },
+        "3": { "name": "support.type.mank" }
+      }
+    },
+    "function-param-list": {
+      "begin": "\\(",
+      "end": "\\)",
+      "patterns": [
+				{
+          "include": "#param-list"
+				}
+      ]
+    },
+    "blocks": {
+      "begin": "\\{",
+      "end": "\\{",
+      "patterns": [
+        { "include": "#blocks" }
+      ]
+    },
 		"function-declaration": {
-      "begin": "\\b(fun|proc)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+      "begin": "\\b(fun|proc)\\s+([_$[:alpha:]][_$[:alnum:]]*)(?:\\s*\\:\\s*(?:(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|([_$[:alpha:]][_$[:alnum:]]*)))?",
       "beginCaptures": {
         "1": { "name": "constant.language.symbol-type.mank" },
-        "2": { "name": "meta.definition.function.js entity.name.function.js" }
+        "2": { "name": "meta.definition.function.js entity.name.function.js" },
+        "3": { "name": "constant.language.mank" },
+        "4": { "name": "support.type.mank" }
       },
-      "end": "\\:|\\(|\\{"
+      "end": "\\{",
+      "patterns": [
+				{
+          "include": "#function-param-list"
+        },
+        {
+          "begin": "\\{",
+          "end": "\\}",
+          "contentName": "meta.tag.function-body.mank",
+          "include": "#blocks"
+        }
+      ]
     },
     "pod-declaration": {
-      "begin": "\\b(pod)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+      "begin": "\\b(pod)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s*{",
       "beginCaptures": {
         "1": { "name": "constant.language.mank" },
         "2": { "name": "support.type.mank" }
       },
-      "end": "\\{"
+      "end": "\\}",
+      "name":"meta.structure.pod.mank",
+      "patterns": [
+				{
+          "include": "#param-list"
+				}
+      ]
     },
+    "keywords": {
+			"patterns": [{
+				"name": "keyword.control.mank",
+				"match": "\\b(if|else|while|for|return)\\b"
+      }, {
+        "name": "constant.language.mank",
+        "match": "\\b(true|false)\\b"
+      }]
+		},
     "numeric-literals": {
       "name": "constant.numeric.mank",
       "match": "\\b([0-9]+(\\.[0-9]+)?)\\b"
