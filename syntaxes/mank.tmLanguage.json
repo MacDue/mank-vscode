@@ -59,7 +59,16 @@
       "patterns": [
 				{
           "include": "#param-list"
-				}
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#numeric-literals"
+        }
       ]
     },
     "blocks": {
@@ -101,7 +110,16 @@
       "patterns": [
 				{
           "include": "#param-list"
-				}
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#numeric-literals"
+        }
       ]
     },
     "keywords": {
