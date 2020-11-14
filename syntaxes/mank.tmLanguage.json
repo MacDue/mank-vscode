@@ -31,6 +31,9 @@
     },
     {
       "include": "#misc-ident"
+    },
+    {
+      "include": "#lambda"
     }
 	],
 	"repository": {
@@ -51,6 +54,9 @@
       "patterns": [
 				{
           "include": "#custom-types"
+        },
+        {
+          "include": "#lambda"
         },
         {
           "include": "#misc-ident"
@@ -90,6 +96,9 @@
           "include": "#custom-types"
         },
         {
+          "include": "#lambda"
+        },
+        {
           "include": "#numeric-literals"
         },
         {
@@ -111,6 +120,9 @@
       "patterns": [
 				{
           "include": "#custom-types"
+        },
+        {
+          "include": "#lambda"
         },
         {
           "include": "#misc-ident"
@@ -148,7 +160,7 @@
       "name": "comment.line.mank"
     },
     "call":{
-      "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\s*\\(",
+      "match": "\\b([_$[:alpha:]][_$[:alnum:]]*(?:\\s*!)?)\\s*\\(",
       "captures": {
         "1": {"name": "meta.definition.function.js entity.name.function.js" }
       }
@@ -165,6 +177,37 @@
       "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\b",
       "captures": {
         "1": {"name": "support.type.property-name.mank" }
+      }
+    },
+    "lambda-type": {
+      "match": "\\b(?:(ref)\\s+)?(?:(?:(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|([_$[:alpha:]][_$[:alnum:]]*)))\\b",
+      "captures": {
+        "1": {"name": "keyword.control.mank" },
+        "2": {"name": "constant.language.mank" },
+        "3": {"name": "support.type.mank" }
+      }
+    },
+    "lambda-param": {
+      "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\s*:",
+      "captures": {
+        "1": {"name": "support.type.property-name.mank" }
+      }
+    },
+    "lambda": {
+      "begin": "\\\\",
+      "end": "->\\s*(?:(ref)\\s+)?(?:(?:(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|([_$[:alpha:]][_$[:alnum:]]*)))\\b",
+      "patterns": [
+        {
+          "include": "#lambda-param"
+        },
+        {
+          "include": "#lambda-type"
+        }
+      ],
+      "endCaptures": {
+        "1": {"name": "keyword.control.mank" },
+        "2": {"name": "constant.language.mank" },
+        "3": {"name": "support.type.mank" }
       }
     }
 	},
