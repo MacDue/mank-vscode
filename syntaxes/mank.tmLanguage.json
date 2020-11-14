@@ -102,6 +102,9 @@
           "include": "#numeric-literals"
         },
         {
+          "include": "#comments"
+        },
+        {
           "begin": "\\{",
           "end": "\\}",
           "contentName": "meta.tag.function-body.mank",
@@ -202,6 +205,12 @@
         },
         {
           "include": "#lambda-type"
+        },
+        {
+          "include": "#numeric-literals"
+        },
+        {
+          "include": "#comments"
         }
       ],
       "endCaptures": {
