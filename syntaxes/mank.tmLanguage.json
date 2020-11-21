@@ -33,6 +33,9 @@
       "include": "#misc-ident"
     },
     {
+      "include": "#lambda-types"
+    },
+    {
       "include": "#lambda"
     }
 	],
@@ -56,7 +59,7 @@
           "include": "#custom-types"
         },
         {
-          "include": "#lambda"
+          "include": "#lambda-types"
         },
         {
           "include": "#misc-ident"
@@ -96,7 +99,7 @@
           "include": "#custom-types"
         },
         {
-          "include": "#lambda"
+          "include": "#lambda-types"
         },
         {
           "include": "#numeric-literals"
@@ -125,7 +128,7 @@
           "include": "#custom-types"
         },
         {
-          "include": "#lambda"
+          "include": "#lambda-types"
         },
         {
           "include": "#misc-ident"
@@ -200,6 +203,29 @@
       "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\s*:",
       "captures": {
         "1": {"name": "support.type.property-name.mank" }
+      }
+    },
+    "lambda-types": {
+      "begin": "(?<=:)\\s*\\\\",
+      "end": "->\\s*(?:(ref)\\s+)?(?:(?:(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|([_$[:alpha:]][_$[:alnum:]]*)))\\b",
+      "patterns": [
+        {
+          "include": "#lambda-param"
+        },
+        {
+          "include": "#lambda-type"
+        },
+        {
+          "include": "#numeric-literals"
+        },
+        {
+          "include": "#comments"
+        }
+      ],
+      "endCaptures": {
+        "1": {"name": "keyword.control.mank" },
+        "2": {"name": "constant.language.mank" },
+        "3": {"name": "support.type.mank" }
       }
     },
     "lambda": {
