@@ -230,7 +230,7 @@
     },
     "lambda": {
       "begin": "\\\\",
-      "end": "->(?:(?:\\s*(?:(ref)\\s+)?(?:(?:(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|([_$[:alpha:]][_$[:alnum:]]*)))\\b)|(?:\\s*{))",
+      "end": "->(?:(?:\\s*(?:(ref)\\s+)?(?:(?:(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|(?:(ref)|([_$[:alpha:]][_$[:alnum:]]*))))\\b)|(?:\\s*{))",
       "patterns": [
         {
           "include": "#keywords"
@@ -254,7 +254,8 @@
       "endCaptures": {
         "1": {"name": "keyword.control.mank" },
         "2": {"name": "constant.language.mank" },
-        "3": {"name": "support.type.mank" }
+        "3": {"name": "keyword.control.mank"},
+        "4": {"name": "support.type.mank" }
       }
     }
 	},
