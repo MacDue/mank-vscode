@@ -9,6 +9,9 @@
 			"include": "#strings"
     },
     {
+      "include": "#chars"
+    },
+    {
       "include": "#primitives"
     },
     {
@@ -51,6 +54,17 @@
 				}
 			]
     },
+    "chars": {
+      "name": "string.quoted.single.mank",
+      "begin": "'",
+      "end": "'",
+			"patterns": [
+				{
+					"name": "constant.character.escape.mank",
+					"match": "\\\\."
+				}
+			]
+    },
     "function-param-list": {
       "begin": "\\(",
       "end": "\\)",
@@ -69,6 +83,9 @@
         },
         {
           "include": "#strings"
+        },
+        {
+          "include": "#chars"
         },
         {
           "include": "#numeric-literals"
@@ -140,6 +157,9 @@
           "include": "#strings"
         },
         {
+          "include": "#chars"
+        },
+        {
           "include": "#numeric-literals"
         }
       ]
@@ -159,7 +179,7 @@
     },
     "primitives": {
       "name": "constant.language.mank",
-      "match": "\\b(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)\\b"
+      "match": "\\b(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str|bind)\\b"
     },
     "comments": {
       "match": "\\#.*$",
@@ -172,11 +192,12 @@
       }
     },
     "custom-types": {
-      "match": "\\:\\s*(?:(ref)\\s+)?(?:(?:(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|([_$[:alpha:]][_$[:alnum:]]*)))\\b",
+      "match": "\\:\\s*(?:(ref)\\s+)?(?:(?:(i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|(?:(ref)|([_$[:alpha:]][_$[:alnum:]]*))))\\b",
       "captures": {
         "1": {"name": "keyword.control.mank" },
         "2": {"name": "constant.language.mank" },
-        "3": {"name": "support.type.mank" }
+        "3": {"name": "keyword.control.mank" },
+        "4": {"name": "support.type.mank" }
       }
     },
     "misc-ident": {
@@ -194,7 +215,7 @@
       }
     },
     "typeless-lambda-param": {
-      "match": "(?<=,|\\\\)([_$[:alpha:]][_$[:alnum:]]*)\\s*(?=,|->)",
+      "match": "(?<=,|\\\\)\\s*([_$[:alpha:]][_$[:alnum:]]*)\\s*(?=,|->)",
       "captures": {
         "1": {"name": "support.type.property-name.mank" }
       }
