@@ -100,7 +100,7 @@
       ]
     },
 		"function-declaration": {
-      "begin": "\\b(fun|proc)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
+      "begin": "\\b(fun|proc|test)\\s+([_$[:alpha:]][_$[:alnum:]]*)",
       "beginCaptures": {
         "1": { "name": "constant.language.symbol-type.mank" },
         "2": { "name": "meta.definition.function.js entity.name.function.js" },
@@ -167,7 +167,7 @@
     "keywords": {
 			"patterns": [{
 				"name": "keyword.control.mank",
-				"match": "\\b(if|else|while|for|return|in|ref)\\b"
+				"match": "\\b(if|else|while|for|return|in|ref|until|loop|break|continue)\\b"
       }, {
         "name": "constant.language.mank",
         "match": "\\b(true|false)\\b"
