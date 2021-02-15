@@ -5,6 +5,9 @@
 		{
 			"include": "#keywords"
 		},
+    {
+      "include": "#const-declaration"
+    },
 		{
 			"include": "#strings"
     },
@@ -131,6 +134,13 @@
           "include": "#blocks"
         }
       ]
+    },
+    "const-declaration": {
+      "match": "\\b(const)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\b",
+      "captures": {
+        "1": {"name": "constant.language.mank"},
+        "2": {"name": "variable.other.global" }
+      }
     },
     "pod-declaration": {
       "begin": "\\b(pod)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s*{",
