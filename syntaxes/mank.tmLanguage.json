@@ -39,6 +39,9 @@
       "include": "#call"
     },
     {
+      "include": "#enum-access"
+    },
+    {
       "include": "#custom-types"
     },
     {
@@ -347,7 +350,7 @@
     "keywords": {
 			"patterns": [{
 				"name": "keyword.control.mank",
-				"match": "\\b(if|else|while|for|return|in|ref|until|loop|break|continue)\\b"
+				"match": "\\b(if|else|switch|as|while|for|return|in|ref|until|loop|break|continue)\\b"
       }, {
         "name": "constant.language.mank",
         "match": "\\b(true|false)\\b"
@@ -413,6 +416,13 @@
       "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\s*:",
       "captures": {
         "1": {"name": "support.type.property-name.mank" }
+      }
+    },
+    "enum-access": {
+      "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\s*::\\s*([_$[:alpha:]][_$[:alnum:]]*)\\b",
+      "captures": {
+        "1": { "name": "support.type.mank" },
+        "2": { "name": "variable.other.enummember.mank" }
       }
     },
     "lambda-types": {
