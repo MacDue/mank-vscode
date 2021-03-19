@@ -27,6 +27,9 @@
       "include": "#pod-declaration"
     },
     {
+      "include": "#type-alias"
+    },
+    {
       "include": "#comments"
     },
     {
@@ -142,6 +145,25 @@
         "2": {"name": "variable.other.global" }
       }
     },
+    "type-alias": {
+      "begin": "\\b(typedef)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s*=",
+      "beginCaptures": {
+        "1": { "name": "constant.language.mank" },
+        "2": { "name": "support.type.mank" }
+      },
+      "end": ";",
+      "patterns": [
+        {
+          "include": "#lambda-types-no-prefix"
+        },
+        {
+          "include": "#custom-types-no-prefix"
+        },
+        {
+          "include": "#numeric-literals"
+        }
+      ]
+    },
     "pod-declaration": {
       "begin": "\\b(pod)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s*{",
       "beginCaptures": {
@@ -173,6 +195,15 @@
           "include": "#numeric-literals"
         }
       ]
+    },
+    "enum-member": {},
+    "enum-declaration": {
+      "begin": "\\b(enum)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s*{",
+      "beginCaptures": {
+        "1": { "name": "constant.language.mank" },
+        "2": { "name": "support.type.mank" }
+      },
+      "end": "\\}"
     },
     "keywords": {
 			"patterns": [{
@@ -210,6 +241,15 @@
         "4": {"name": "support.type.mank" }
       }
     },
+    "custom-types-no-prefix": {
+      "match": "\\b\\s*(?:(ref)\\s+)?(?:(?:(char|i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)|(?:(ref)|([_$[:alpha:]][_$[:alnum:]]*))))\\b",
+      "captures": {
+        "1": {"name": "keyword.control.mank" },
+        "2": {"name": "constant.language.mank" },
+        "3": {"name": "keyword.control.mank" },
+        "4": {"name": "support.type.mank" }
+      }
+    },
     "misc-ident": {
       "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\b",
       "captures": {
@@ -238,6 +278,29 @@
     },
     "lambda-types": {
       "begin": "(?<=:)\\s*\\\\",
+      "end": "->\\s*(?:(ref)\\s+)?(?:(?:(char|i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)\\b|([_$[:alpha:]][_$[:alnum:]]*\\b)|(\\(\\s*\\))))",
+      "patterns": [
+        {
+          "include": "#lambda-param"
+        },
+        {
+          "include": "#lambda-type"
+        },
+        {
+          "include": "#numeric-literals"
+        },
+        {
+          "include": "#comments"
+        }
+      ],
+      "endCaptures": {
+        "1": {"name": "keyword.control.mank" },
+        "2": {"name": "constant.language.mank" },
+        "3": {"name": "support.type.mank" }
+      }
+    },
+    "lambda-types-no-prefix": {
+      "begin": "\\s*\\\\",
       "end": "->\\s*(?:(ref)\\s+)?(?:(?:(char|i8|i16|i32|i64|u8|u16|u32|u64|bool|f32|f64|str)\\b|([_$[:alpha:]][_$[:alnum:]]*\\b)|(\\(\\s*\\))))",
       "patterns": [
         {
