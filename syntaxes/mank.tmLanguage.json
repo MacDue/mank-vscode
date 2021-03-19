@@ -27,6 +27,9 @@
       "include": "#pod-declaration"
     },
     {
+      "include": "#enum-declaration"
+    },
+    {
       "include": "#type-alias"
     },
     {
@@ -160,6 +163,18 @@
           "include": "#custom-types-no-prefix"
         },
         {
+          "include": "#misc-ident"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#chars"
+        },
+        {
           "include": "#numeric-literals"
         }
       ]
@@ -196,13 +211,137 @@
         }
       ]
     },
-    "enum-member": {},
+    "tuple-type": {
+      "begin": "\\(",
+      "end": "\\)",
+      "patterns": [
+        {
+          "include": "#tuple-type"
+        },
+        {
+          "include": "#lambda-types-no-prefix"
+        },
+        {
+          "include": "#custom-types-no-prefix"
+        },
+        {
+          "include": "#misc-ident"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#chars"
+        },
+        {
+          "include": "#numeric-literals"
+        }
+      ]
+    },
+    "tuple-enum-member": {
+      "begin": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\s*\\(",
+      "end": "\\)",
+      "beginCaptures": {
+        "1": {"name": "variable.other.enummember.mank" }
+      },
+      "patterns": [
+        {
+          "include": "#tuple-type"
+        },
+        {
+          "include": "#lambda-types-no-prefix"
+        },
+        {
+          "include": "#custom-types-no-prefix"
+        },
+        {
+          "include": "#misc-ident"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#chars"
+        },
+        {
+          "include": "#numeric-literals"
+        }
+      ]
+    },
+    "pod-enum-member": {
+      "begin": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\s*{",
+      "beginCaptures": {
+        "1": {"name": "variable.other.enummember.mank" }
+      },
+      "end": "\\}",
+      "patterns": [
+				{
+          "include": "#custom-types"
+        },
+        {
+          "include": "#lambda-types"
+        },
+        {
+          "include": "#misc-ident"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#chars"
+        },
+        {
+          "include": "#numeric-literals"
+        }
+      ]
+    },
+    "enum-member": {
+      "match": "\\b([_$[:alpha:]][_$[:alnum:]]*)\\b",
+      "captures": {
+        "1": {"name": "variable.other.enummember.mank" }
+      }
+    },
     "enum-declaration": {
       "begin": "\\b(enum)\\s+([_$[:alpha:]][_$[:alnum:]]*)\\s*{",
       "beginCaptures": {
         "1": { "name": "constant.language.mank" },
         "2": { "name": "support.type.mank" }
       },
+      "patterns": [
+        {
+          "include": "#pod-enum-member"
+        },
+        {
+          "include": "#tuple-enum-member"
+        },
+				{
+          "include": "#enum-member"
+        },
+        {
+          "include": "#misc-ident"
+        },
+        {
+          "include": "#comments"
+        },
+        {
+          "include": "#strings"
+        },
+        {
+          "include": "#chars"
+        },
+        {
+          "include": "#numeric-literals"
+        }
+      ],
       "end": "\\}"
     },
     "keywords": {
